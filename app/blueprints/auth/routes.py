@@ -6,5 +6,5 @@ def login():
     return render_template('auth/login.html')
 
 @auth_bp.route('/authregistro')
-def tienda():
+def registro():
     return render_template('auth/registro.html')
