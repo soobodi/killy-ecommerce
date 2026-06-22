@@ -5,6 +5,6 @@ from . import auth_bp
 def login():
     return render_template('auth/login.html')
 
-@public_bp.route('/registro')
+@public_bp.route('/authregistro')
 def tienda():
     return render_template('auth/registro.html')
