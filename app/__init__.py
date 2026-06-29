@@ -11,9 +11,11 @@ def create_app():
     app.config.from_object(Config)
 
     #inicializando la base de datos
-
     db.init_app(app)
     migrate.init_app(app, db)
+
+    #Modelos
+    from app.models import Usuario
 
     #Blueprints
     #agregando a un factory
@@ -23,7 +25,7 @@ def create_app():
 
     app.register_blueprint (public_bp)
     app.register_blueprint (auth_bp, url_prefix='/auth')
-    app.register_blueprint (admin_bp, url_prefix='/admin')
+    app.register_blueprint (admin_bp, url_prefix='/admin')  
 
     return app
     
