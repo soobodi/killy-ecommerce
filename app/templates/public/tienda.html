@@ -1,119 +1,321 @@
 {% extends 'base.html' %}
-{% block title %}Tienda{% endblock %}
+
+{% block title %}
+Catálogo | Killy
+{% endblock %}
 
 {% block content %}
-<div class="row">
 
-  <!-- Sidebar filtros -->
-  <div class="col-md-3">
-    <div class="card mb-3">
-      <div class="card-header fw-bold">Buscar</div>
-      <div class="card-body">
-        <form method="GET">
-          <input type="text" name="q" value="{{ busqueda }}"
-                 class="form-control mb-2" placeholder="Nombre del producto...">
-          <button class="btn btn-primary w-100">Buscar</button>
-        </form>
-      </div>
-    </div>
+<section class="mb-4">
 
-    <div class="card">
-      <div class="card-header fw-bold">Categorías</div>
-      <div class="list-group list-group-flush">
-        <a href="{{ url_for('public.tienda') }}"
-           class="list-group-item list-group-item-action
-                  {% if not categoria_id %}active{% endif %}">
-          Todas
-        </a>
-        {% for cat in categorias %}
-        <a href="{{ url_for('public.tienda', categoria=cat.id) }}"
-           class="list-group-item list-group-item-action
-                  {% if categoria_id == cat.id %}active{% endif %}">
-          {{ cat.nombre }}
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+    <span class="badge badge-killy mb-2">
+        Catálogo Killy
+    </span>
 
-  <!-- Grilla de productos -->
-  <div class="col-md-9">
-    <div class="d-flex justify-content-between mb-3">
-      <h5>{{ productos.total }} producto(s) encontrado(s)</h5>
-    </div>
+    <h1 class="titulo-seccion">
+        Encuentra el regalo perfecto
+    </h1>
 
-    {% if productos.items %}
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      {% for p in productos.items %}
-      <div class="col">
-        <div class="card h-100 shadow-sm">
-          {% if p.imagen %}
-            <img src="{{ url_for('static', filename='img/' + p.imagen) }}"
-                 class="card-img-top" style="height:160px; object-fit:cover;">
-          {% else %}
-            <div class="bg-light text-center py-4 text-muted">Sin imagen</div>
-          {% endif %}
-          <div class="card-body">
-            <h6 class="card-title">{{ p.nombre }}</h6>
-            <span class="badge bg-secondary">{{ p.categoria.nombre }}</span>
-            <p class="text-primary fw-bold mt-2">${{ "%.2f"|format(p.precio) }}</p>
-            <small class="text-muted">Stock: {{ p.stock }}</small>
-          </div>
-          <div class="card-footer d-grid gap-2">
-            <a href="{{ url_for('public.detalle_producto', id=p.id) }}"
-               class="btn btn-sm btn-outline-primary">Ver detalle</a>
-            <form method="POST"
-                  action="{{ url_for('public.agregar_carrito', id=p.id) }}">
-              <input type="hidden" name="cantidad" value="1">
-              <button class="btn btn-sm btn-primary w-100"
-                      {% if not p.tiene_stock() %}disabled{% endif %}>
-                🛒 Agregar
-              </button>
-            </form>
-          </div>
+    <p>
+        Explora nuestros regalos personalizados y detalles para
+        cada ocasión especial.
+    </p>
+
+</section>
+
+<div class="row g-4">
+
+    <!-- Filtros -->
+    <aside class="col-lg-3">
+
+        <div class="card card-killy mb-4">
+
+            <div class="card-header filtro-encabezado">
+                Buscar productos
+            </div>
+
+            <div class="card-body">
+
+                <form method="GET">
+
+                    <input
+                        type="text"
+                        name="q"
+                        value="{{ busqueda }}"
+                        class="form-control mb-3"
+                        placeholder="Nombre del producto">
+
+                    <button class="btn btn-killy w-100">
+                        Buscar
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
-      </div>
-      {% endfor %}
-    </div>
 
-    <!-- Paginación -->
-    <nav class="mt-4">
-      <ul class="pagination justify-content-center">
-        {% if productos.has_prev %}
-        <li class="page-item">
-          <a class="page-link"
-             href="{{ url_for('public.tienda', pagina=productos.prev_num,
-                             categoria=categoria_id, q=busqueda) }}">
-            Anterior
-          </a>
-        </li>
-        {% endif %}
-        {% for num in productos.iter_pages() %}
-          {% if num %}
-          <li class="page-item {% if num == productos.page %}active{% endif %}">
-            <a class="page-link"
-               href="{{ url_for('public.tienda', pagina=num,
-                               categoria=categoria_id, q=busqueda) }}">
-              {{ num }}
-            </a>
-          </li>
-          {% endif %}
-        {% endfor %}
-        {% if productos.has_next %}
-        <li class="page-item">
-          <a class="page-link"
-             href="{{ url_for('public.tienda', pagina=productos.next_num,
-                             categoria=categoria_id, q=busqueda) }}">
-            Siguiente
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-    </nav>
+        <div class="card card-killy">
 
-    {% else %}
-    <div class="alert alert-info">No se encontraron productos.</div>
-    {% endif %}
-  </div>
+            <div class="card-header filtro-encabezado">
+                Categorías
+            </div>
+
+            <div class="list-group list-group-flush">
+
+                <a
+                    href="{{ url_for('public.tienda') }}"
+                    class="list-group-item list-group-item-action
+                    categoria-filtro
+                    {% if not categoria_id %}categoria-activa{% endif %}">
+
+                    Todas las categorías
+
+                </a>
+
+                {% for cat in categorias %}
+
+                    <a
+                        href="{{ url_for(
+                            'public.tienda',
+                            categoria=cat.id
+                        ) }}"
+                        class="list-group-item list-group-item-action
+                        categoria-filtro
+                        {% if categoria_id == cat.id %}
+                        categoria-activa
+                        {% endif %}">
+
+                        {{ cat.nombre }}
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- Productos -->
+    <section class="col-lg-9">
+
+        <div class="d-flex justify-content-between
+                    align-items-center mb-3">
+
+            <h5 class="mb-0">
+                {{ productos.total }} producto(s) disponible(s)
+            </h5>
+
+        </div>
+
+        {% if productos.items %}
+
+            <div class="row row-cols-1 row-cols-md-2
+                        row-cols-xl-3 g-4">
+
+                {% for p in productos.items %}
+
+                    <div class="col">
+
+                        <div class="card card-killy h-100">
+
+                            {% if p.imagen %}
+
+                                <img
+                                    src="{{ url_for(
+                                        'static',
+                                        filename='img/' + p.imagen
+                                    ) }}"
+                                    class="card-img-top"
+                                    alt="{{ p.nombre }}"
+                                    style="height: 190px;
+                                           object-fit: cover;">
+
+                            {% else %}
+
+                                <div class="producto-sin-imagen">
+
+                                    <span class="fs-1">🎁</span>
+
+                                    <p class="mb-0 mt-2">
+                                        Imagen próximamente
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+                            <div class="card-body">
+
+                                <span class="badge badge-killy mb-2">
+                                    {{ p.categoria.nombre }}
+                                </span>
+
+                                <h5 class="card-title">
+                                    {{ p.nombre }}
+                                </h5>
+
+                                {% if p.descripcion %}
+
+                                    <p class="card-text text-muted">
+                                        {{ p.descripcion }}
+                                    </p>
+
+                                {% endif %}
+
+                                <p class="precio-killy mb-1">
+                                    ${{ "%.2f"|format(p.precio) }}
+                                </p>
+
+                                <small class="text-muted">
+                                    Disponibles: {{ p.stock }}
+                                </small>
+
+                            </div>
+
+                            <div class="card-footer bg-white
+                                        border-0 pb-3">
+
+                                <div class="d-grid gap-2">
+
+                                    <a
+                                        href="{{ url_for(
+                                            'public.detalle_producto',
+                                            id=p.id
+                                        ) }}"
+                                        class="btn btn-outline-killy">
+
+                                        Ver detalles
+
+                                    </a>
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for(
+                                            'public.agregar_carrito',
+                                            id=p.id
+                                        ) }}">
+
+                                        <input
+                                            type="hidden"
+                                            name="cantidad"
+                                            value="1">
+
+                                        <button
+                                            class="btn btn-killy w-100"
+                                            {% if not p.tiene_stock() %}
+                                            disabled
+                                            {% endif %}>
+
+                                            🛒 Agregar al carrito
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            <!-- Paginación -->
+            <nav class="mt-4">
+
+                <ul class="pagination justify-content-center">
+
+                    {% if productos.has_prev %}
+
+                        <li class="page-item">
+
+                            <a
+                                class="page-link pagina-killy"
+                                href="{{ url_for(
+                                    'public.tienda',
+                                    pagina=productos.prev_num,
+                                    categoria=categoria_id,
+                                    q=busqueda
+                                ) }}">
+
+                                Anterior
+
+                            </a>
+
+                        </li>
+
+                    {% endif %}
+
+                    {% for num in productos.iter_pages() %}
+
+                        {% if num %}
+
+                            <li class="page-item">
+
+                                <a
+                                    class="page-link pagina-killy
+                                    {% if num == productos.page %}
+                                    pagina-activa
+                                    {% endif %}"
+                                    href="{{ url_for(
+                                        'public.tienda',
+                                        pagina=num,
+                                        categoria=categoria_id,
+                                        q=busqueda
+                                    ) }}">
+
+                                    {{ num }}
+
+                                </a>
+
+                            </li>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if productos.has_next %}
+
+                        <li class="page-item">
+
+                            <a
+                                class="page-link pagina-killy"
+                                href="{{ url_for(
+                                    'public.tienda',
+                                    pagina=productos.next_num,
+                                    categoria=categoria_id,
+                                    q=busqueda
+                                ) }}">
+
+                                Siguiente
+
+                            </a>
+
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </nav>
+
+        {% else %}
+
+            <div class="alert alerta-killy">
+                No se encontraron productos.
+            </div>
+
+        {% endif %}
+
+    </section>
+
 </div>
+
 {% endblock %}

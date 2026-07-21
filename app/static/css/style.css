@@ -1,0 +1,219 @@
+:root {
+    --killy-crema: #F5EFE6;
+    --killy-verde: #D9EBC7;
+    --killy-celeste: #CFEAF8;
+    --killy-cafe: #A8764F;
+    --killy-rosa: #F8D4C5;
+    --killy-texto: #333333;
+    --killy-blanco: #FFFFFF;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    background-color: var(--killy-crema);
+    color: var(--killy-texto);
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    flex: 1;
+}
+
+/* Menú */
+
+.navbar-killy {
+    background-color: var(--killy-crema);
+    border-bottom: 2px solid var(--killy-verde);
+    box-shadow: 0 2px 10px rgba(51, 51, 51, 0.08);
+}
+
+.logo-killy {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.navbar-killy .nav-link {
+    color: var(--killy-texto);
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.navbar-killy .nav-link:hover {
+    color: var(--killy-cafe);
+}
+
+/* Botones */
+
+.btn-killy {
+    background-color: var(--killy-verde);
+    border: 1px solid var(--killy-verde);
+    color: var(--killy-texto);
+    font-weight: 700;
+}
+
+.btn-killy:hover {
+    background-color: var(--killy-cafe);
+    border-color: var(--killy-cafe);
+    color: var(--killy-blanco);
+}
+
+.btn-outline-killy {
+    background-color: transparent;
+    border: 1px solid var(--killy-cafe);
+    color: var(--killy-cafe);
+    font-weight: 600;
+}
+
+.btn-outline-killy:hover {
+    background-color: var(--killy-cafe);
+    color: var(--killy-blanco);
+}
+
+/* Portada */
+
+.hero-killy {
+    background: linear-gradient(
+        135deg,
+        var(--killy-celeste),
+        var(--killy-rosa)
+    );
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.hero-killy h1 {
+    color: var(--killy-texto);
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+}
+
+/* Tarjetas */
+
+.card-killy {
+    background-color: var(--killy-blanco);
+    border: 1px solid var(--killy-verde);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-killy:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(51, 51, 51, 0.12);
+}
+
+.titulo-seccion {
+    color: var(--killy-texto);
+    font-weight: 700;
+}
+
+.precio-killy {
+    color: var(--killy-cafe);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.categoria-killy {
+    background-color: var(--killy-celeste);
+    color: var(--killy-texto);
+    border: none;
+}
+
+.badge-killy {
+    background-color: var(--killy-rosa);
+    color: var(--killy-texto);
+}
+
+/* Footer */
+
+.footer-killy {
+    background-color: var(--killy-crema);
+    border-top: 2px solid var(--killy-verde);
+    margin-top: 50px;
+    padding: 32px 0;
+}
+
+.footer-killy h5 {
+    color: var(--killy-cafe);
+    font-weight: 700;
+}
+
+.footer-killy p {
+    margin-bottom: 5px;
+}
+
+.footer-integrantes {
+    color: var(--killy-texto);
+    font-size: 0.95rem;
+}
+
+/* Catálogo */
+
+.filtro-encabezado {
+    background-color: var(--killy-celeste);
+    color: var(--killy-texto);
+    font-weight: 700;
+    border-bottom: 1px solid var(--killy-verde);
+}
+
+.categoria-filtro {
+    background-color: var(--killy-blanco);
+    color: var(--killy-texto);
+    border-color: var(--killy-crema);
+}
+
+.categoria-filtro:hover {
+    background-color: var(--killy-rosa);
+    color: var(--killy-texto);
+}
+
+.categoria-activa {
+    background-color: var(--killy-verde) !important;
+    color: var(--killy-texto) !important;
+    font-weight: 700;
+    border-color: var(--killy-verde) !important;
+}
+
+.producto-sin-imagen {
+    min-height: 190px;
+    background-color: var(--killy-celeste);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--killy-texto);
+}
+
+.pagina-killy {
+    color: var(--killy-texto);
+    border-color: var(--killy-verde);
+}
+
+.pagina-killy:hover {
+    background-color: var(--killy-rosa);
+    color: var(--killy-texto);
+    border-color: var(--killy-rosa);
+}
+
+.pagina-activa {
+    background-color: var(--killy-verde);
+    color: var(--killy-texto);
+    font-weight: 700;
+}
+
+.alerta-killy {
+    background-color: var(--killy-celeste);
+    color: var(--killy-texto);
+    border: none;
+}
