@@ -103,7 +103,12 @@ def agregar_carrito(id):
         flash('Cantidad ajustada al stock disponible.', 'info')
 
     session['carrito'] = carrito
-    flash(f'"{producto.nombre}" agregado al carrito.', 'success')
+    destino = request.form.get('destino', 'carrito')
+    flash(
+    f'"{producto.nombre}" fue agregado al carrito.',
+    'success')
+    if destino == 'pago':
+        return redirect(url_for('public.pago'))
     return redirect(url_for('public.carrito'))
 
 
