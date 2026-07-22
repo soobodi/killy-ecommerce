@@ -1,6 +1,161 @@
-<!-- home.html -->
- {%extends 'base.html'%}
+{% extends 'base.html' %}
 
-  {%block content%}
-   <h1> Bienvenidos al dashboard</h1>
-   {% endblock %}
+{% block title %}
+Panel administrativo | Killy
+{% endblock %}
+
+{% block content %}
+
+<section class="mb-4">
+    <span class="badge badge-killy mb-2">
+        Administración
+    </span>
+
+    <h1 class="titulo-seccion">
+        Panel administrativo
+    </h1>
+
+    <p>
+        Controle los productos, categorías, clientes y pedidos de Killy.
+    </p>
+</section>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card card-killy h-100">
+            <div class="card-body">
+                <p class="text-muted mb-1">Productos activos</p>
+                <h2 class="fw-bold">{{ total_productos }}</h2>
+
+                <a
+                    href="{{ url_for('admin.productos') }}"
+                    class="btn btn-killy mt-2">
+                    Gestionar productos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card card-killy h-100">
+            <div class="card-body">
+                <p class="text-muted mb-1">Categorías activas</p>
+                <h2 class="fw-bold">{{ total_categorias }}</h2>
+
+                <a
+                    href="{{ url_for('admin.categorias') }}"
+                    class="btn btn-killy mt-2">
+                    Gestionar categorías
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card card-killy h-100">
+            <div class="card-body">
+                <p class="text-muted mb-1">Clientes activos</p>
+                <h2 class="fw-bold">{{ total_clientes }}</h2>
+
+                <a
+                    href="{{ url_for('admin.clientes') }}"
+                    class="btn btn-killy mt-2">
+                    Gestionar clientes
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card card-killy h-100">
+            <div class="card-body">
+                <p class="text-muted mb-1">Pedidos registrados</p>
+                <h2 class="fw-bold">{{ total_pedidos }}</h2>
+
+                <a
+                    href="{{ url_for('admin.pedidos') }}"
+                    class="btn btn-killy mt-2">
+                    Gestionar pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<section class="mb-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+            <h2 class="titulo-seccion mb-1">
+                Productos con bajo stock
+            </h2>
+
+            <p class="mb-0">
+                Productos con cinco unidades o menos.
+            </p>
+        </div>
+
+        <a
+            href="{{ url_for('admin.productos') }}"
+            class="btn btn-outline-killy">
+            Ver productos
+        </a>
+
+    </div>
+
+    <div class="card card-killy">
+
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for producto in productos_bajo_stock %}
+
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+
+                            <td>
+                                {{ producto.categoria.nombre }}
+                            </td>
+
+                            <td>
+                                <span class="badge badge-killy">
+                                    {{ producto.stock }}
+                                </span>
+                            </td>
+                        </tr>
+
+                    {% else %}
+
+                        <tr>
+                            <td colspan="3" class="text-center py-4">
+                                No existen productos con bajo stock.
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

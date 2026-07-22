@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% if categoria %}
+    {% set titulo = 'Editar categoría' %}
+{% else %}
+    {% set titulo = 'Crear categoría' %}
+{% endif %}
+
+{% block title %}
+{{ titulo }} | Administración Killy
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-7">
+
+        <div class="mb-4">
+
+            <span class="badge badge-killy mb-2">
+                Administración
+            </span>
+
+            <h1 class="titulo-seccion">
+                {{ titulo }}
+            </h1>
+
+            <p>
+                Complete la información de la categoría.
+            </p>
+
+        </div>
+
+        <div class="card card-killy">
+
+            <div class="card-body p-4">
+
+                <form method="POST">
+
+                    <div class="mb-3">
+
+                        <label
+                            for="nombre"
+                            class="form-label fw-semibold">
+
+                            Nombre de la categoría
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            class="form-control"
+                            maxlength="80"
+                            required
+                            value="{{ categoria.nombre if categoria else '' }}">
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label
+                            for="descripcion"
+                            class="form-label fw-semibold">
+
+                            Descripción
+
+                        </label>
+
+                        <textarea
+                            id="descripcion"
+                            name="descripcion"
+                            class="form-control"
+                            rows="4"
+                            maxlength="200">{{ categoria.descripcion if categoria and categoria.descripcion else '' }}</textarea>
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-killy">
+
+                            Guardar categoría
+
+                        </button>
+
+                        <a
+                            href="{{ url_for('admin.categorias') }}"
+                            class="btn btn-outline-killy">
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
