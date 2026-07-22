@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% if producto %}
+    {% set titulo = 'Editar producto' %}
+{% else %}
+    {% set titulo = 'Crear producto' %}
+{% endif %}
+
+{% block title %}
+{{ titulo }} | Administración Killy
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-xl-9">
+
+        <div class="mb-4">
+
+            <span class="badge badge-killy mb-2">
+                Administración
+            </span>
+
+            <h1 class="titulo-seccion">
+                {{ titulo }}
+            </h1>
+
+            <p class="mb-0">
+                Complete la información del producto.
+            </p>
+
+        </div>
+
+        <div class="card card-killy">
+
+            <div class="card-body p-4">
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data">
+
+                    <div class="row g-4">
+
+                        <div class="col-md-8">
+
+                            <label
+                                for="nombre"
+                                class="form-label fw-semibold">
+
+                                Nombre del producto
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombre"
+                                name="nombre"
+                                class="form-control"
+                                maxlength="150"
+                                required
+                                value="{{ producto.nombre if producto else '' }}">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label
+                                for="categoria_id"
+                                class="form-label fw-semibold">
+
+                                Categoría
+
+                            </label>
+
+                            <select
+                                id="categoria_id"
+                                name="categoria_id"
+                                class="form-select"
+                                required>
+
+                                <option value="">
+                                    Seleccione una categoría
+                                </option>
+
+                                {% for categoria in categorias %}
+
+                                    <option
+                                        value="{{ categoria.id }}"
+                                        {% if producto and producto.categoria_id == categoria.id %}
+                                            selected
+                                        {% endif %}>
+
+                                        {{ categoria.nombre }}
+
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="precio"
+                                class="form-label fw-semibold">
+
+                                Precio
+
+                            </label>
+
+                            <input
+                                type="number"
+                                id="precio"
+                                name="precio"
+                                class="form-control"
+                                min="0"
+                                step="0.01"
+                                required
+                                value="{{ producto.precio if producto else '' }}">
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="stock"
+                                class="form-label fw-semibold">
+
+                                Stock
+
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stock"
+                                name="stock"
+                                class="form-control"
+                                min="0"
+                                required
+                                value="{{ producto.stock if producto else 0 }}">
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="descripcion"
+                                class="form-label fw-semibold">
+
+                                Descripción
+
+                            </label>
+
+                            <textarea
+                                id="descripcion"
+                                name="descripcion"
+                                class="form-control"
+                                rows="5"
+                                placeholder="Describa el producto">{{ producto.descripcion if producto and producto.descripcion else '' }}</textarea>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="imagen"
+                                class="form-label fw-semibold">
+
+                                Imagen del producto
+
+                            </label>
+
+                            <input
+                                type="file"
+                                id="imagen"
+                                name="imagen"
+                                class="form-control"
+                                accept=".jpg,.jpeg,.webp">
+
+                            <div class="form-text">
+                                Formatos permitidos: JPG, JPEG y WEBP.
+                                Tamaño máximo: 3 MB.
+                            </div>
+
+                        </div>
+
+                        {% if producto and producto.imagen %}
+
+                            <div class="col-12">
+
+                                <p class="fw-semibold mb-2">
+                                    Imagen actual
+                                </p>
+
+                                <img
+                                    src="{{ url_for(
+                                        'static',
+                                        filename='img/' + producto.imagen
+                                    ) }}"
+                                    alt="{{ producto.nombre }}"
+                                    width="180"
+                                    height="180"
+                                    style="
+                                        object-fit: cover;
+                                        border-radius: 14px;
+                                        border: 1px solid #ddd;
+                                    ">
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+
+                        <button
+                            type="submit"
+                            class="btn btn-killy">
+
+                            {% if producto %}
+                                Guardar cambios
+                            {% else %}
+                                Crear producto
+                            {% endif %}
+
+                        </button>
+
+                        <a
+                            href="{{ url_for('admin.productos') }}"
+                            class="btn btn-outline-killy">
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
