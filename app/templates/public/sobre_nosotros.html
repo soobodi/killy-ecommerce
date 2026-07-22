@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre Nosotros | Killy{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="about-hero py-5">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">Nuestra Historia</h1>
+        <p class="lead">
+            Creamos detalles únicos que convierten cada momento en un recuerdo inolvidable.
+        </p>
+    </div>
+</section>
+
+<!-- HISTORIA -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 mb-4 mb-lg-0">
+
+                <img
+                    src="{{ url_for('static', filename='img/logo-killy.png') }}"
+                    class="img-fluid rounded shadow"
+                    alt="Killy">
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <h2>Nuestra esencia</h2>
+
+                <p>
+                    En Killy creemos que los pequeños detalles tienen el poder de transmitir grandes emociones.
+                    Nos especializamos en crear regalos personalizados, arreglos con dulces, amigurumis,
+                    llaveros tejidos y detalles diseñados especialmente para cada ocasión.
+                </p>
+
+                <p>
+                    Nuestro objetivo es que cada cliente encuentre un regalo diferente, creativo y elaborado con dedicación,
+                    convirtiendo cada celebración en un momento especial.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- MISIÓN Y VISIÓN -->
+<section class="about-values py-5">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-4">
+
+                <div class="about-card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <h3>Misión</h3>
+
+                        <p>
+                            Diseñar regalos personalizados de alta calidad que transmitan emociones y permitan
+                            a nuestros clientes sorprender a las personas que más quieren.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card border-0 shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <h3>Visión</h3>
+
+                        <p>
+                            Convertirnos en una marca reconocida por la creatividad,
+                            innovación y calidad de nuestros detalles personalizados,
+                            siendo la primera opción para regalar momentos inolvidables.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- VALORES -->
+
+<section class="about-section py-5">
+
+    <div class="container text-center">
+
+        <h2 class="mb-5">Nuestros Valores</h2>
+
+        <div class="row">
+
+            <div class="col-md-3 mb-4">
+
+                <h5> Amor</h5>
+
+                <p>Cada detalle es elaborado con dedicación y cariño.</p>
+
+            </div>
+
+            <div class="col-md-3 mb-4">
+
+                <h5> Creatividad</h5>
+
+                <p>Diseños originales adaptados a cada ocasión especial.</p>
+
+            </div>
+
+            <div class="col-md-3 mb-4">
+
+                <h5> Compromiso</h5>
+
+                <p>Nos enfocamos en brindar productos de excelente calidad.</p>
+
+            </div>
+
+            <div class="col-md-3 mb-4">
+
+                <h5> Personalización</h5>
+
+                <p>Cada regalo refleja la personalidad y el cariño de quien lo entrega.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="about-cta py-5 text-center">
+    
+    <div class="container">
+
+        <h2 class="mb-3">
+            ¿Listo para sorprender a alguien especial?
+        </h2>
+
+        <p class="mb-4">
+            Descubre todos nuestros regalos personalizados y encuentra el detalle perfecto.
+        </p>
+
+        <a href="{{ url_for('public.tienda') }}" class="btn btn-primary btn-lg">
+
+            Explorar tienda
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

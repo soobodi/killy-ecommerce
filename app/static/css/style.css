@@ -497,3 +497,92 @@ main {
     background-color: #fbeeee;
     color: #8b3d3d;
 }
+
+/* ===========================
+   SOBRE NOSOTROS
+=========================== */
+
+.about-hero{
+    background: linear-gradient(135deg,#FAF8F5,#F5EFE7);
+    padding:90px 0;
+}
+
+.about-hero h1{
+    font-family:'Cormorant Garamond', serif;
+    color:#2D2D2D;
+    font-weight:700;
+}
+
+.about-hero p{
+    color:#6E6E6E;
+    max-width:700px;
+    margin:auto;
+}
+
+.about-hero .lead{
+    font-size:1.2rem;
+}
+
+.about-hero img{
+    max-width:180px;
+}
+
+.about-section h2{
+    font-family:'Cormorant Garamond', serif;
+    color:#2D2D2D;
+    margin-bottom:20px;
+}
+
+.about-section p{
+    color:#555;
+    line-height:1.9;
+}
+
+.about-card{
+    border:none;
+    border-radius:18px;
+    transition:.3s;
+    background:#fff;
+}
+
+.about-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.about-values{
+    background:#FAF8F5;
+}
+
+.about-values h2{
+    font-family:'Cormorant Garamond', serif;
+    margin-bottom:50px;
+}
+
+.about-values h5{
+    color:#A88BC7;
+    font-weight:600;
+}
+
+.about-values p{
+    color:#666;
+}
+
+.about-cta{
+    background:#fff;
+}
+
+.about-cta h2{
+    font-family:'Cormorant Garamond', serif;
+}
+
+.about-cta .btn{
+    background:#A88BC7;
+    border:none;
+    padding:12px 30px;
+    border-radius:30px;
+}
+
+.about-cta .btn:hover{
+    background:#8E73B2;
+}

@@ -16,6 +16,10 @@ def home():
                            productos=productos_destacados,
                            categorias=categorias)
 
+# SOBRE NOSOTROS
+@public_bp.route("/sobre-nosotros")
+def sobre_nosotros():
+    return render_template("public/sobre_nosotros.html")
 
 # ── TIENDA ────────────────────────────────────────────────────────
 @public_bp.route('/tienda')
