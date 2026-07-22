@@ -676,19 +676,197 @@ def cambiar_estado_producto(id):
 # MÓDULOS PENDIENTES
 # =========================================================
 
+# =========================================================
+# ADMINISTRACIÓN DE CLIENTES
+# =========================================================
+
 @admin_bp.route('/clientes')
 @login_required
 @admin_requerido
 def clientes():
-    return render_template(
-        'admin/clientes.html'
+    busqueda = request.args.get(
+        'q',
+        ''
+    ).strip()
+
+    query = Usuario.query.filter_by(
+        rol='cliente'
     )
 
+    if busqueda:
+        termino = f'%{busqueda}%'
+
+        query = query.filter(
+            db.or_(
+                Usuario.nombre.ilike(termino),
+                Usuario.email.ilike(termino)
+            )
+        )
+
+    listado_clientes = query.order_by(
+        Usuario.activo.desc(),
+        Usuario.creado_en.desc()
+    ).all()
+
+    return render_template(
+        'admin/clientes.html',
+        clientes=listado_clientes,
+        busqueda=busqueda
+    )
+
+
+@admin_bp.route(
+    '/clientes/<int:id>/estado',
+    methods=['POST']
+)
+@login_required
+@admin_requerido
+def cambiar_estado_cliente(id):
+    cliente = Usuario.query.filter_by(
+        id=id,
+        rol='cliente'
+    ).first_or_404()
+
+    cliente.activo = not cliente.activo
+
+    db.session.commit()
+
+    if cliente.activo:
+        mensaje = 'Cliente activado correctamente.'
+    else:
+        mensaje = 'Cliente desactivado correctamente.'
+
+    flash(mensaje, 'success')
+
+    return redirect(
+        url_for('admin.clientes')
+    )
+
+
+# =========================================================
+# ADMINISTRACIÓN DE PEDIDOS
+# =========================================================
 
 @admin_bp.route('/pedidos')
 @login_required
 @admin_requerido
 def pedidos():
+    busqueda = request.args.get(
+        'q',
+        ''
+    ).strip()
+
+    estado = request.args.get(
+        'estado',
+        ''
+    ).strip()
+
+    query = Pedido.query.join(
+        Usuario,
+        Pedido.usuario_id == Usuario.id
+    )
+
+    if busqueda:
+        termino = f'%{busqueda}%'
+
+        filtros = [
+            Usuario.nombre.ilike(termino),
+            Usuario.email.ilike(termino)
+        ]
+
+        if busqueda.isdigit():
+            filtros.append(
+                Pedido.id == int(busqueda)
+            )
+
+        query = query.filter(
+            db.or_(*filtros)
+        )
+
+    estados_permitidos = {
+        'pendiente',
+        'pagado',
+        'enviado',
+        'entregado',
+        'cancelado'
+    }
+
+    if estado in estados_permitidos:
+        query = query.filter(
+            Pedido.estado == estado
+        )
+
+    listado_pedidos = query.order_by(
+        Pedido.fecha.desc()
+    ).all()
+
     return render_template(
-        'admin/pedidos.html'
+        'admin/pedidos.html',
+        pedidos=listado_pedidos,
+        busqueda=busqueda,
+        estado=estado
+    )
+
+
+@admin_bp.route('/pedidos/<int:id>')
+@login_required
+@admin_requerido
+def detalle_pedido(id):
+    pedido = Pedido.query.get_or_404(id)
+
+    return render_template(
+        'admin/pedido_detalle.html',
+        pedido=pedido
+    )
+
+
+@admin_bp.route(
+    '/pedidos/<int:id>/estado',
+    methods=['POST']
+)
+@login_required
+@admin_requerido
+def cambiar_estado_pedido(id):
+    pedido = Pedido.query.get_or_404(id)
+
+    nuevo_estado = request.form.get(
+        'estado',
+        ''
+    ).strip()
+
+    estados_permitidos = {
+        'pendiente',
+        'pagado',
+        'enviado',
+        'entregado',
+        'cancelado'
+    }
+
+    if nuevo_estado not in estados_permitidos:
+        flash(
+            'El estado seleccionado no es válido.',
+            'danger'
+        )
+
+        return redirect(
+            url_for(
+                'admin.detalle_pedido',
+                id=pedido.id
+            )
+        )
+
+    pedido.estado = nuevo_estado
+
+    db.session.commit()
+
+    flash(
+        'Estado del pedido actualizado correctamente.',
+        'success'
+    )
+
+    return redirect(
+        url_for(
+            'admin.detalle_pedido',
+            id=pedido.id
+        )
     )

@@ -15,7 +15,13 @@ class Pedido(db.Model):
     notas           = db.Column(db.Text)
 
     # Clave foránea → usuarios
-    usuario_id      = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
+
+    usuario = db.relationship(
+    'Usuario',
+    backref='pedidos',
+    lazy=True
+)
 
     # Relación: un pedido tiene muchas líneas de detalle
     detalles        = db.relationship('DetallePedido', backref='pedido',

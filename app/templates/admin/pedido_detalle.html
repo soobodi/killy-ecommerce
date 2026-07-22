@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Pedido #{{ pedido.id }} | Administración Killy
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between
+            align-items-center gap-3 mb-4">
+
+    <div>
+
+        <span class="badge badge-killy mb-2">
+            Administración
+        </span>
+
+        <h1 class="titulo-seccion mb-1">
+            Pedido #{{ pedido.id }}
+        </h1>
+
+        <p class="mb-0">
+            Información completa del pedido.
+        </p>
+
+    </div>
+
+    <a
+        href="{{ url_for('admin.pedidos') }}"
+        class="btn btn-outline-killy">
+
+        ← Volver a pedidos
+
+    </a>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-lg-8">
+
+        <div class="card card-killy mb-4">
+
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">
+                    Productos del pedido
+                </h5>
+
+                <div class="table-responsive">
+
+                    <table class="table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th class="text-end">
+                                    Subtotal
+                                </th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for detalle in pedido.detalles %}
+
+                                <tr>
+
+                                    <td>
+
+                                        <div class="d-flex
+                                                    align-items-center
+                                                    gap-3">
+
+                                            {% if detalle.producto.imagen %}
+
+                                                <img
+                                                    src="{{ url_for(
+                                                        'static',
+                                                        filename='img/' + detalle.producto.imagen
+                                                    ) }}"
+                                                    alt="{{ detalle.producto.nombre }}"
+                                                    width="60"
+                                                    height="60"
+                                                    style="
+                                                        object-fit: cover;
+                                                        border-radius: 10px;
+                                                    ">
+
+                                            {% else %}
+
+                                                <div
+                                                    class="d-flex
+                                                           align-items-center
+                                                           justify-content-center"
+                                                    style="
+                                                        width: 60px;
+                                                        height: 60px;
+                                                        border-radius: 10px;
+                                                        background-color: #CFEAF8;
+                                                    ">
+
+                                                    🎁
+
+                                                </div>
+
+                                            {% endif %}
+
+                                            <div class="fw-semibold">
+                                                {{ detalle.producto.nombre }}
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+                                        ${{ "%.2f"|format(detalle.precio_unitario) }}
+                                    </td>
+
+                                    <td>
+                                        {{ detalle.cantidad }}
+                                    </td>
+
+                                    <td class="text-end fw-semibold">
+                                        ${{ "%.2f"|format(detalle.subtotal()) }}
+                                    </td>
+
+                                </tr>
+
+                            {% else %}
+
+                                <tr>
+
+                                    <td
+                                        colspan="4"
+                                        class="text-center py-4">
+
+                                        Este pedido no tiene productos.
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                        <tfoot>
+
+                            <tr>
+
+                                <td
+                                    colspan="3"
+                                    class="text-end fw-bold">
+
+                                    Total
+
+                                </td>
+
+                                <td class="text-end fw-bold">
+                                    ${{ "%.2f"|format(pedido.total) }}
+                                </td>
+
+                            </tr>
+
+                        </tfoot>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card card-killy">
+
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">
+                    Información de entrega
+                </h5>
+
+                <p class="mb-2">
+
+                    <strong>Dirección:</strong>
+
+                    {{ pedido.direccion or 'No registrada' }}
+
+                </p>
+
+                <p class="mb-0">
+
+                    <strong>Notas:</strong>
+
+                    {{ pedido.notas or 'Sin notas adicionales' }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card card-killy mb-4">
+
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">
+                    Cliente
+                </h5>
+
+                <p class="mb-2">
+                    <strong>Nombre:</strong>
+                    {{ pedido.usuario.nombre }}
+                </p>
+
+                <p class="mb-2">
+                    <strong>Correo:</strong>
+                    {{ pedido.usuario.email }}
+                </p>
+
+                <p class="mb-0">
+
+                    <strong>Fecha:</strong>
+
+                    {% if pedido.fecha %}
+
+                        {{ pedido.fecha.strftime('%d/%m/%Y %H:%M') }}
+
+                    {% else %}
+
+                        Sin fecha
+
+                    {% endif %}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card card-killy">
+
+            <div class="card-body">
+
+                <h5 class="fw-bold mb-3">
+                    Estado del pedido
+                </h5>
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'admin.cambiar_estado_pedido',
+                        id=pedido.id
+                    ) }}">
+
+                    <label
+                        for="estado"
+                        class="form-label fw-semibold">
+
+                        Seleccione el estado
+
+                    </label>
+
+                    <select
+                        id="estado"
+                        name="estado"
+                        class="form-select mb-3"
+                        required>
+
+                        <option
+                            value="pendiente"
+                            {% if pedido.estado == 'pendiente' %}
+                                selected
+                            {% endif %}>
+
+                            Pendiente
+
+                        </option>
+
+                        <option
+                            value="pagado"
+                            {% if pedido.estado == 'pagado' %}
+                                selected
+                            {% endif %}>
+
+                            Pagado
+
+                        </option>
+
+                        <option
+                            value="enviado"
+                            {% if pedido.estado == 'enviado' %}
+                                selected
+                            {% endif %}>
+
+                            Enviado
+
+                        </option>
+
+                        <option
+                            value="entregado"
+                            {% if pedido.estado == 'entregado' %}
+                                selected
+                            {% endif %}>
+
+                            Entregado
+
+                        </option>
+
+                        <option
+                            value="cancelado"
+                            {% if pedido.estado == 'cancelado' %}
+                                selected
+                            {% endif %}>
+
+                            Cancelado
+
+                        </option>
+
+                    </select>
+
+                    <button
+                        type="submit"
+                        class="btn btn-killy w-100"
+                        onclick="return confirm(
+                            '¿Desea actualizar el estado del pedido?'
+                        )">
+
+                        Actualizar estado
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
