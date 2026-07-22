@@ -454,3 +454,46 @@ main {
         max-width: 1180px;
     }
 }
+
+/* Menú de usuario */
+
+.usuario-menu {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.usuario-menu i {
+    font-size: 1.1rem;
+}
+
+.menu-cuenta {
+    min-width: 190px;
+    padding: 8px;
+    border: 1px solid #ece5de;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.menu-cuenta .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: #444;
+}
+
+.menu-cuenta .dropdown-item:hover {
+    background-color: #f6f1eb;
+}
+
+.menu-cuenta .cerrar-sesion {
+    color: #9a4f4f;
+}
+
+.menu-cuenta .cerrar-sesion:hover {
+    background-color: #fbeeee;
+    color: #8b3d3d;
+}
