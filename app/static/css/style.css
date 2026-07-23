@@ -586,3 +586,187 @@ main {
 .about-cta .btn:hover{
     background:#8E73B2;
 }
+/* ==========================================================
+   CONTACTO
+========================================================== */
+
+.contact-hero {
+    padding: 90px 20px 70px;
+    background:
+        radial-gradient(circle at top right, rgba(200, 182, 226, 0.35), transparent 35%),
+        linear-gradient(135deg, #faf8f5, #ffffff);
+}
+
+.contact-hero .contact-eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #a88bc7;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.contact-hero h1 {
+    margin-bottom: 18px;
+    color: #2d2d2d;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+    font-weight: 700;
+}
+
+.contact-hero p {
+    max-width: 680px;
+    margin: 0 auto;
+    color: #6e6e6e;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.contact-section {
+    padding: 75px 0;
+    background: #ffffff;
+}
+
+.contact-card {
+    height: 100%;
+    padding: 38px 30px;
+    border: 1px solid rgba(168, 139, 199, 0.18);
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 12px 35px rgba(45, 45, 45, 0.07);
+    text-align: center;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 45px rgba(45, 45, 45, 0.12);
+}
+
+.contact-icon {
+    display: flex;
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f2ecf8;
+    color: #a88bc7;
+    font-size: 1.8rem;
+}
+
+.contact-card h2 {
+    margin-bottom: 14px;
+    color: #2d2d2d;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.contact-card p {
+    min-height: 78px;
+    margin-bottom: 18px;
+    color: #6e6e6e;
+    line-height: 1.7;
+}
+
+.contact-link {
+    color: #a88bc7;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    color: #8567a8;
+}
+
+.contact-cta {
+    padding: 25px 0 85px;
+    background: #ffffff;
+}
+
+.contact-cta-content {
+    display: flex;
+    padding: 45px 50px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+    border-radius: 26px;
+    background: #faf8f5;
+}
+
+.contact-cta-content span {
+    color: #a88bc7;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.contact-cta-content h2 {
+    margin: 10px 0;
+    color: #2d2d2d;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+}
+
+.contact-cta-content p {
+    margin: 0;
+    color: #6e6e6e;
+}
+
+.contact-whatsapp-btn {
+    display: inline-flex;
+    padding: 14px 25px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: #a88bc7;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.contact-whatsapp-btn:hover {
+    transform: translateY(-2px);
+    background: #8e73b2;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 70px 18px 55px;
+    }
+
+    .contact-section {
+        padding: 55px 0;
+    }
+
+    .contact-card p {
+        min-height: auto;
+    }
+
+    .contact-cta {
+        padding-bottom: 60px;
+    }
+
+    .contact-cta-content {
+        padding: 35px 25px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .contact-whatsapp-btn {
+        width: 100%;
+    }
+}

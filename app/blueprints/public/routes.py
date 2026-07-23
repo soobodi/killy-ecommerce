@@ -20,6 +20,10 @@ def home():
 @public_bp.route("/sobre-nosotros")
 def sobre_nosotros():
     return render_template("public/sobre_nosotros.html")
+# ── CONTACTO ──────────────────────────────────────────────────────
+@public_bp.route("/contacto")
+def contacto():
+    return render_template("public/contacto.html")
 
 # ── TIENDA ────────────────────────────────────────────────────────
 @public_bp.route('/tienda')
