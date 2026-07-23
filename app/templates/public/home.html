@@ -6,29 +6,30 @@ Inicio | Killy
 
 {% block content %}
 
-<section class="hero-killy p-4 p-md-5 mb-5">
+<!-- ======================================================
+     HERO PRINCIPAL
+====================================================== -->
+<section class="killy-home-hero">
 
-    <div class="row align-items-center">
+    <div class="killy-home-hero__content">
 
-        <div class="col-md-7">
+        <div class="killy-home-hero__text">
 
-            <span class="badge badge-killy mb-3">
-                Regalos personalizados
-            </span>
-
-            <h1 class="display-4 fw-bold">
-                Regalos que cuentan historias
+            <h1>
+                Regalos que<br>
+                cuentan historias
             </h1>
 
-            <p class="fs-5 mt-3">
-                Encuentra detalles únicos para cumpleaños,
-                aniversarios, celebraciones y momentos especiales.
-                En Killy puedes elegir regalos personalizados para
-                sorprender a las personas que más quieres.
+            <p>
+                Encuentra detalles únicos para cumpleaños, aniversarios,
+                celebraciones y momentos especiales. En Killy puedes elegir
+                regalos personalizados para sorprender a las personas que
+                más quieres.
             </p>
 
-            <a href="{{ url_for('public.tienda') }}"
-               class="btn btn-killy btn-lg mt-2">
+            <a
+                href="{{ url_for('public.tienda') }}"
+                class="killy-home-hero__button">
 
                 Explorar regalos
 
@@ -36,12 +37,12 @@ Inicio | Killy
 
         </div>
 
-        <div class="col-md-5 text-center mt-4 mt-md-0">
+        <div class="killy-home-hero__visual">
 
             <img
-                src="{{ url_for('static', filename='img/logo-killy.png') }}"
-                alt="Killy, regalos personalizados"
-                class="hero-logo">
+                src="{{ url_for('static', filename='img/hero-killy.png') }}"
+                alt="Composición de regalos personalizados Killy"
+                class="killy-home-hero__image">
 
         </div>
 
@@ -49,139 +50,143 @@ Inicio | Killy
 
 </section>
 
-<section class="mb-5">
 
-    <h2 class="titulo-seccion mb-3">
-        Categorías
-    </h2>
+<!-- ======================================================
+     INFORMACIÓN VISUAL DE LAS COLECCIONES
+====================================================== -->
+{% set colecciones = {
+    "🌸 Ramos de Gomitas": {
+        "nombre_limpio": "Ramos de Gomitas",
+        "imagen": "img/colecciones/ramos-gomitas.jpg",
+        "descripcion": "Detalles dulces que transmiten emociones y llenan de alegría."
+    },
+    "🧶 Llaveros Tejidos": {
+        "nombre_limpio": "Llaveros Tejidos",
+        "imagen": "img/colecciones/llaveros-tejidos.jpg",
+        "descripcion": "Pequeños detalles hechos a mano con amor en cada puntada."
+    },
+    "🧸 Amigurumis": {
+        "nombre_limpio": "Amigurumis",
+        "imagen": "img/colecciones/amigurumis.jpg",
+        "descripcion": "Personajes tejidos con dedicación para regalar momentos especiales."
+    },
+    "🍫 Cajas de Dulces": {
+        "nombre_limpio": "Cajas de Dulces",
+        "imagen": "img/colecciones/cajas-dulces.jpg",
+        "descripcion": "Detalles deliciosos para endulzar cualquier ocasión."
+    },
+    "🚑 Botiquines de Dulces": {
+        "nombre_limpio": "Botiquines de Dulces",
+        "imagen": "img/colecciones/botiquines-dulces.jpg",
+        "descripcion": "Un regalo original lleno de dulces y buenos deseos."
+    },
+    "🎈 Globos Personalizados": {
+        "nombre_limpio": "Globos Personalizados",
+        "imagen": "img/colecciones/globos-personalizados.jpg",
+        "descripcion": "El toque perfecto para celebrar y decorar momentos inolvidables."
+    },
+    "🎁 Cajas Temáticas": {
+        "nombre_limpio": "Cajas Temáticas",
+        "imagen": "img/colecciones/cajas-tematicas.jpg",
+        "descripcion": "Regalos diseñados especialmente para cada celebración."
+    },
+    "💝 Cajas Sorpresa": {
+        "nombre_limpio": "Cajas Sorpresa",
+        "imagen": "img/colecciones/cajas-sorpresa.jpg",
+        "descripcion": "Momentos inolvidables dentro de una caja llena de sorpresas."
+    }
+} %}
 
-    <p class="mb-4">
-        Descubre diferentes opciones creadas para cada ocasión.
-    </p>
+<!-- ======================================================
+     COLECCIONES
+====================================================== -->
+<section class="killy-collections">
 
-    <div class="d-flex flex-wrap gap-2">
+    <div class="killy-collections__heading">
+
+        <span>
+            Nuestras colecciones
+        </span>
+
+        <h2>
+            Encuentra el regalo perfecto para cada ocasión
+        </h2>
+
+        <p>
+            Elige el detalle ideal para tu persona favorita
+        </p>
+
+    </div>
+
+    <div class="killy-collections__list">
 
         {% for cat in categorias %}
 
-            <a
-                href="{{ url_for('public.tienda', categoria=cat.id) }}"
-                class="btn categoria-killy">
+            {% set info = colecciones.get(cat.nombre) %}
 
-                {{ cat.nombre }}
+            <article class="killy-collection-card">
 
-            </a>
+                <a
+                    href="{{ url_for('public.tienda', categoria=cat.id) }}"
+                    class="killy-collection-card__link"
+                    aria-label="Ver colección {{ cat.nombre }}">
 
-        {% else %}
+                    <div class="killy-collection-card__text">
 
-            <p class="text-muted">
-                Todavía no existen categorías disponibles.
-            </p>
+                       <h3>
+    {% if info %}
+        {{ info.nombre_limpio }}
+    {% else %}
+        {{ cat.nombre }}
+    {% endif %}
+</h3>
 
-        {% endfor %}
-
-    </div>
-
-</section>
-
-<section>
-
-    <div class="d-flex justify-content-between
-                align-items-center mb-3">
-
-        <div>
-            <h2 class="titulo-seccion mb-1">
-                Productos destacados
-            </h2>
-
-            <p class="mb-0">
-                Detalles preparados especialmente para sorprender.
-            </p>
-        </div>
-
-        <a href="{{ url_for('public.tienda') }}"
-           class="btn btn-outline-killy">
-
-            Ver catálogo
-
-        </a>
-
-    </div>
-
-    <div class="row row-cols-1 row-cols-sm-2
-                row-cols-lg-4 g-4">
-
-        {% for p in productos %}
-
-            <div class="col">
-
-                <div class="card card-killy h-100">
-
-                    {% if p.imagen %}
-
-                        <img
-                            src="{{ url_for(
-                                'static',
-                                filename='img/' + p.imagen
-                            ) }}"
-                            class="card-img-top"
-                            alt="{{ p.nombre }}"
-                            style="height: 220px; object-fit: cover;">
-
-                    {% else %}
-
-                        <div class="text-center py-5 categoria-killy">
-                            🎁
-                            <p class="mb-0 mt-2">
-                                Imagen próximamente
-                            </p>
-                        </div>
-
-                    {% endif %}
-
-                    <div class="card-body">
-
-                        <span class="badge badge-killy mb-2">
-                            {{ p.categoria.nombre }}
-                        </span>
-
-                        <h5 class="card-title">
-                            {{ p.nombre }}
-                        </h5>
-
-                        <p class="precio-killy mb-0">
-                            ${{ "%.2f"|format(p.precio) }}
+                        <p>
+                            {% if info %}
+                                {{ info.descripcion }}
+                            {% else %}
+                                Descubre productos especiales de esta colección.
+                            {% endif %}
                         </p>
 
-                    </div>
-
-                    <div class="card-footer bg-white border-0 pb-3">
-
-                        <a
-                            href="{{ url_for(
-                                'public.detalle_producto',
-                                id=p.id
-                            ) }}"
-                            class="btn btn-killy w-100">
-
-                            Ver producto
-
-                        </a>
+                        <span class="killy-collection-card__action">
+                            Ver colección
+                            <i class="bi bi-arrow-right"></i>
+                        </span>
 
                     </div>
 
-                </div>
+                    <div class="killy-collection-card__image">
 
-            </div>
+                        {% if info %}
+
+                            <img
+                                src="{{ url_for('static', filename=info.imagen) }}"
+                              alt="{% if info %}{{ info.nombre_limpio }}{% else %}{{ cat.nombre }}{% endif %}"
+
+                        {% else %}
+
+                            <div class="killy-collection-card__placeholder">
+                                <i class="bi bi-gift"></i>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <span class="killy-collection-card__arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </span>
+
+                </a>
+
+            </article>
 
         {% else %}
 
-            <div class="col-12">
-
-                <div class="alert alert-light">
-                    Todavía no existen productos disponibles.
-                </div>
-
-            </div>
+            <p class="text-center text-muted">
+                Todavía no existen colecciones disponibles.
+            </p>
 
         {% endfor %}
 

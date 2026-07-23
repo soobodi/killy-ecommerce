@@ -770,3 +770,661 @@ main {
         width: 100%;
     }
 }
+/* ==========================================================
+   COLECCIONES - HOME
+========================================================== */
+
+.colecciones-killy {
+    padding: 80px 0;
+}
+
+.colecciones-encabezado {
+    max-width: 760px;
+    margin: 0 auto 48px;
+}
+
+.colecciones-eyebrow {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #a88bc7;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.colecciones-encabezado h2 {
+    margin-bottom: 12px;
+    color: #2d2d2d;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 700;
+}
+
+.colecciones-encabezado p {
+    margin: 0;
+    color: #6e6e6e;
+    font-size: 1rem;
+}
+
+.colecciones-lista {
+    display: grid;
+    gap: 18px;
+}
+
+.coleccion-card {
+    overflow: hidden;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition:
+        transform 300ms ease,
+        box-shadow 300ms ease,
+        background 300ms ease;
+}
+
+.coleccion-card:hover {
+    transform: translateY(-7px);
+    background: #fcf9fd;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.1);
+}
+
+.coleccion-card-link {
+    position: relative;
+    display: grid;
+    min-height: 190px;
+    grid-template-columns: 42% 58%;
+    align-items: stretch;
+    color: inherit;
+    text-decoration: none;
+}
+
+.coleccion-contenido {
+    display: flex;
+    padding: 34px 42px;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+}
+
+.coleccion-contenido h3 {
+    margin-bottom: 10px;
+    color: #2d2d2d;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+}
+
+.coleccion-contenido p {
+    max-width: 320px;
+    margin-bottom: 16px;
+    color: #6e6e6e;
+    line-height: 1.6;
+}
+
+.coleccion-ver {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #a88bc7;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.coleccion-ver i {
+    transition: transform 300ms ease;
+}
+
+.coleccion-card:hover .coleccion-ver i {
+    transform: translateX(5px);
+}
+
+.coleccion-imagen {
+    overflow: hidden;
+}
+
+.coleccion-imagen img {
+    width: 100%;
+    height: 100%;
+    min-height: 190px;
+    object-fit: cover;
+    transition: transform 300ms ease;
+}
+
+.coleccion-card:hover .coleccion-imagen img {
+    transform: scale(1.05);
+}
+
+.coleccion-flecha {
+    position: absolute;
+    top: 50%;
+    right: 26px;
+    display: flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #c8b6e2;
+    color: #ffffff;
+    transform: translateY(-50%);
+    transition:
+        transform 300ms ease,
+        background 300ms ease;
+}
+
+.coleccion-card:hover .coleccion-flecha {
+    transform: translate(5px, -50%);
+    background: #a88bc7;
+}
+
+.coleccion-sin-imagen {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 190px;
+    align-items: center;
+    justify-content: center;
+    background: #faf8f5;
+    color: #a88bc7;
+    font-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .colecciones-killy {
+        padding: 60px 0;
+    }
+
+    .coleccion-card-link {
+        min-height: 170px;
+        grid-template-columns: 48% 52%;
+    }
+
+    .coleccion-contenido {
+        padding: 26px 24px;
+    }
+
+    .coleccion-contenido h3 {
+        font-size: 1.65rem;
+    }
+
+    .coleccion-contenido p {
+        font-size: 0.9rem;
+    }
+
+    .coleccion-flecha {
+        right: 16px;
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 575px) {
+    .coleccion-card-link {
+        min-height: 300px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 150px;
+    }
+
+    .coleccion-contenido {
+        padding: 25px;
+    }
+
+    .coleccion-imagen img,
+    .coleccion-sin-imagen {
+        min-height: 150px;
+    }
+
+    .coleccion-flecha {
+        top: auto;
+        right: 18px;
+        bottom: 18px;
+        transform: none;
+    }
+
+    .coleccion-card:hover .coleccion-flecha {
+        transform: translateX(5px);
+    }
+}
+/* ==========================================================
+   NUEVO HOME KILLY
+   Diseño inspirado en la referencia final
+========================================================== */
+
+.killy-home-hero,
+.killy-collections {
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.killy-home-hero {
+    margin: 22px 0 72px;
+    overflow: hidden;
+    border-radius: 25px;
+    background:
+        radial-gradient(
+            circle at 15% 30%,
+            rgba(233, 221, 241, 0.92),
+            transparent 43%
+        ),
+        radial-gradient(
+            circle at 87% 35%,
+            rgba(246, 226, 223, 0.88),
+            transparent 46%
+        ),
+        linear-gradient(
+            110deg,
+            #f8f0f7 0%,
+            #faf3f4 50%,
+            #f6e9e5 100%
+        );
+}
+
+.killy-home-hero__content {
+    display: grid;
+    min-height: 490px;
+    grid-template-columns: 45% 55%;
+    align-items: center;
+}
+
+.killy-home-hero__text {
+    position: relative;
+    z-index: 2;
+    padding: 55px 20px 55px 55px;
+}
+
+.killy-home-hero__label {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    background: rgba(205, 180, 219, 0.5);
+    color: #332d32;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.killy-home-hero__text h1 {
+    margin-bottom: 20px;
+    color: #272328;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3.7rem, 6vw, 5.4rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -1.5px;
+}
+
+.killy-home-hero__text p {
+    max-width: 480px;
+    margin-bottom: 28px;
+    color: #555057;
+    font-size: 0.92rem;
+    line-height: 1.75;
+}
+
+.killy-home-hero__button {
+    display: inline-flex;
+    padding: 13px 26px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #dbe8c8;
+    color: #302c30;
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        transform 300ms ease,
+        background-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.killy-home-hero__button:hover {
+    transform: translateY(-3px);
+    background: #ceddaf;
+    color: #302c30;
+    box-shadow: 0 10px 22px rgba(88, 99, 70, 0.15);
+}
+
+.killy-home-hero__visual {
+    position: relative;
+    display: flex;
+    min-height: 490px;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.killy-home-hero__visual::before {
+    content: "";
+    position: absolute;
+    right: 8%;
+    bottom: 7%;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.28);
+    filter: blur(5px);
+}
+
+.killy-home-hero__image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 650px;
+    max-height: 475px;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 18px 20px rgba(72, 51, 60, 0.14));
+    transition: transform 350ms ease;
+}
+
+.killy-home-hero:hover .killy-home-hero__image {
+    transform: scale(1.025);
+}
+
+
+/* ==========================================================
+   ENCABEZADO DE COLECCIONES
+========================================================== */
+
+.killy-collections {
+    padding: 0 45px 85px;
+}
+
+.killy-collections__heading {
+    max-width: 760px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.killy-collections__heading span {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #aa83bc;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.killy-collections__heading h2 {
+    margin-bottom: 8px;
+    color: #272328;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.2rem, 4vw, 3.15rem);
+    font-weight: 700;
+}
+
+.killy-collections__heading p {
+    margin: 0;
+    color: #777078;
+    font-size: 0.88rem;
+}
+
+
+/* ==========================================================
+   TARJETAS HORIZONTALES
+========================================================== */
+
+.killy-collections__list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.killy-collection-card {
+    overflow: hidden;
+    border-radius: 15px;
+    background: #fbf7f5;
+    box-shadow: 0 5px 18px rgba(62, 46, 52, 0.035);
+    transition:
+        transform 300ms ease,
+        box-shadow 300ms ease,
+        background-color 300ms ease;
+}
+
+.killy-collection-card:hover {
+    transform: translateY(-6px);
+    background: #faf3f8;
+    box-shadow: 0 14px 30px rgba(62, 46, 52, 0.095);
+}
+
+.killy-collection-card__link {
+    position: relative;
+    display: grid;
+    min-height: 138px;
+    grid-template-columns: 38% 62%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.killy-collection-card__text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    padding: 24px 32px;
+    flex-direction: column;
+    justify-content: center;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(250, 247, 245, 1) 0%,
+            rgba(250, 247, 245, 0.98) 75%,
+            rgba(250, 247, 245, 0.7) 100%
+        );
+}
+
+.killy-collection-card__text h3 {
+    margin-bottom: 5px;
+    color: #292429;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.75rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.killy-collection-card__text p {
+    max-width: 280px;
+    margin-bottom: 8px;
+    color: #5f595f;
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.killy-collection-card__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #9f72b1;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.killy-collection-card__action i {
+    transition: transform 300ms ease;
+}
+
+.killy-collection-card:hover .killy-collection-card__action i {
+    transform: translateX(5px);
+}
+
+.killy-collection-card__image {
+    position: relative;
+    overflow: hidden;
+}
+
+.killy-collection-card__image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(250, 247, 245, 0.35),
+            transparent 32%
+        );
+    pointer-events: none;
+}
+
+.killy-collection-card__image img {
+    width: 100%;
+    height: 100%;
+    min-height: 138px;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 350ms ease;
+}
+
+.killy-collection-card:hover .killy-collection-card__image img {
+    transform: scale(1.05);
+}
+
+.killy-collection-card__arrow {
+    position: absolute;
+    top: 50%;
+    right: 29px;
+    z-index: 3;
+    display: flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #c9a6dc;
+    color: #ffffff;
+    font-size: 0.95rem;
+    transform: translateY(-50%);
+    transition:
+        transform 300ms ease,
+        background-color 300ms ease,
+        box-shadow 300ms ease;
+}
+
+.killy-collection-card:hover .killy-collection-card__arrow {
+    transform: translate(5px, -50%);
+    background: #aa82bd;
+    box-shadow: 0 8px 18px rgba(113, 79, 128, 0.18);
+}
+
+.killy-collection-card__placeholder {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 138px;
+    align-items: center;
+    justify-content: center;
+    background: #f3e9ef;
+    color: #a884b8;
+    font-size: 2rem;
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 991px) {
+    .killy-home-hero__content {
+        grid-template-columns: 1fr;
+    }
+
+    .killy-home-hero__text {
+        padding: 48px 40px 15px;
+        text-align: center;
+    }
+
+    .killy-home-hero__text p {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .killy-home-hero__visual {
+        min-height: 330px;
+    }
+
+    .killy-home-hero__image {
+        max-height: 340px;
+    }
+
+    .killy-collections {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .killy-collection-card__link {
+        grid-template-columns: 45% 55%;
+    }
+}
+
+
+/* ==========================================================
+   CELULAR
+========================================================== */
+
+@media (max-width: 575px) {
+    .killy-home-hero {
+        margin-top: 10px;
+        margin-bottom: 55px;
+        border-radius: 18px;
+    }
+
+    .killy-home-hero__text {
+        padding: 38px 24px 10px;
+    }
+
+    .killy-home-hero__text h1 {
+        font-size: 3.5rem;
+    }
+
+    .killy-home-hero__visual {
+        min-height: 245px;
+    }
+
+    .killy-home-hero__image {
+        max-height: 250px;
+    }
+
+    .killy-collections {
+        padding: 0 0 65px;
+    }
+
+    .killy-collections__heading {
+        margin-bottom: 28px;
+        padding: 0 18px;
+    }
+
+    .killy-collections__list {
+        gap: 12px;
+    }
+
+    .killy-collection-card__link {
+        min-height: 260px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 140px;
+    }
+
+    .killy-collection-card__text {
+        padding: 22px 24px;
+    }
+
+    .killy-collection-card__image img,
+    .killy-collection-card__placeholder {
+        min-height: 140px;
+    }
+
+    .killy-collection-card__arrow {
+        top: auto;
+        right: 18px;
+        bottom: 18px;
+        transform: none;
+    }
+
+    .killy-collection-card:hover .killy-collection-card__arrow {
+        transform: translateX(5px);
+    }
+}
