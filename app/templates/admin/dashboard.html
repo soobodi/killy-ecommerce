@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | Killy{% endblock %}
+
+{% block content %}
+<h2>Panel administrativo</h2>
+
+<div class="row g-4 my-4">
+
+  <!-- Total productos -->
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5>Productos activos</h5>
+      <p class="fs-4 fw-bold">{{ total_productos }}</p>
+      <a href="{{ url_for('admin.productos') }}" class="btn btn-outline-killy w-100">
+        Gestionar productos
+      </a>
+    </div>
+  </div>
+
+  <!-- Total categorías -->
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5>Categorías activas</h5>
+      <p class="fs-4 fw-bold">{{ total_categorias }}</p>
+      <a href="{{ url_for('admin.categorias') }}" class="btn btn-outline-killy w-100">
+        Gestionar categorías
+      </a>
+    </div>
+  </div>
+
+  <!-- Total clientes -->
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5>Clientes activos</h5>
+      <p class="fs-4 fw-bold">{{ total_clientes }}</p>
+      <a href="{{ url_for('admin.clientes') }}" class="btn btn-outline-killy w-100">
+        Gestionar clientes
+      </a>
+    </div>
+  </div>
+
+  <!-- Total pedidos -->
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5>Pedidos registrados</h5>
+      <p class="fs-4 fw-bold">{{ total_pedidos }}</p>
+      <a href="{{ url_for('admin.pedidos') }}" class="btn btn-outline-killy w-100">
+        Gestionar pedidos
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Productos con bajo stock -->
+<h4>Productos con bajo stock</h4>
+{% if productos_bajo_stock %}
+<ul class="list-group mb-4">
+  {% for p in productos_bajo_stock %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ p.nombre }}
+      <span class="badge bg-warning">{{ p.stock }} unidades</span>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay productos con bajo stock.</p>
+{% endif %}
+{% endblock %}
