@@ -2076,3 +2076,33 @@ main .container > .d-flex:first-child .badge-killy {
         flex-wrap: wrap;
     }
 }
+
+
+
+
+
+
+
+.killy-collection-card {
+    background-color: var(--killy-blanco);
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.killy-collection-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.1);
+}
+
+.killy-collection-card__text {
+    padding: 20px;
+}
+
+.killy-collection-card__image img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+}
