@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Mi Cuenta | Killy
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="titulo-seccion mb-4">Mi cuenta</h2>
+    <p class="mb-4">Desde aquí puedes actualizar tu información y cambiar tu contraseña.</p>
+
+    <!-- Formulario: Información del usuario -->
+    <div class="card card-killy p-4 mb-4">
+        <form method="POST" action="{{ url_for('public.actualizar_cuenta') }}">
+            {{ csrf_token() }}
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre"
+                       value="{{ current_user.nombre }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email" name="email"
+                       value="{{ current_user.email }}" required>
+            </div>
+
+            <button type="submit" class="btn btn-agregar">Actualizar información</button>
+        </form>
+    </div>
+
+    <!-- Formulario: Cambiar contraseña -->
+    <div class="card card-killy p-4">
+        <form method="POST" action="{{ url_for('public.cambiar_contrasena') }}">
+            {{ csrf_token() }}
+
+            <div class="mb-3">
+                <label for="actual" class="form-label">Contraseña actual</label>
+                <input type="password" class="form-control" id="actual" name="actual" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="nueva" class="form-label">Nueva contraseña</label>
+                <input type="password" class="form-control" id="nueva" name="nueva" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmar" class="form-label">Confirmar nueva contraseña</label>
+                <input type="password" class="form-control" id="confirmar" name="confirmar" required>
+            </div>
+
+            <button type="submit" class="btn btn-agregar">Cambiar contraseña</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
