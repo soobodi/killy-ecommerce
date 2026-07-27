@@ -3,7 +3,52 @@ from flask_login import login_required, current_user
 from app import db
 from app.models import Producto, Categoria, Pedido, DetallePedido
 from app.blueprints.public import public_bp
+from werkzeug.security import check_password_hash, generate_password_hash
 
+
+# Ver y actualizar información del usuario
+@public_bp.route('/mi-cuenta', methods=['GET', 'POST'])
+@login_required
+def mi_cuenta():
+    return render_template('public/mi_cuenta.html')
+
+# Actualizar datos básicos
+@public_bp.route('/actualizar-cuenta', methods=['POST'])
+@login_required
+def actualizar_cuenta():
+    nombre = request.form.get('nombre')
+    email  = request.form.get('email')
+
+    if not nombre or not email:
+        flash("Todos los campos son obligatorios.", "danger")
+        return redirect(url_for('public.mi_cuenta'))
+
+    current_user.nombre = nombre
+    current_user.email = email
+    db.session.commit()
+    flash("Información actualizada correctamente.", "success")
+    return redirect(url_for('public.mi_cuenta'))
+
+# Cambiar contraseña
+@public_bp.route('/cambiar-contrasena', methods=['POST'])
+@login_required
+def cambiar_contrasena():
+    actual = request.form.get('actual')
+    nueva  = request.form.get('nueva')
+    confirmar = request.form.get('confirmar')
+
+    if not check_password_hash(current_user.password, actual):
+        flash("Contraseña actual incorrecta.", "danger")
+        return redirect(url_for('public.mi_cuenta'))
+
+    if nueva != confirmar:
+        flash("La nueva contraseña y la confirmación no coinciden.", "danger")
+        return redirect(url_for('public.mi_cuenta'))
+
+    current_user.set_password(nueva)
+    db.session.commit()
+    flash("Contraseña actualizada correctamente.", "success")
+    return redirect(url_for('public.mi_cuenta'))
 
 # ── HOME ──────────────────────────────────────────────────────────
 @public_bp.route('/')
@@ -15,6 +60,8 @@ def home():
     return render_template('public/home.html',
                            productos=productos_destacados,
                            categorias=categorias)
+
+
 
 # SOBRE NOSOTROS
 @public_bp.route("/sobre-nosotros")
