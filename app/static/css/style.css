@@ -2077,11 +2077,9 @@ main .container > .d-flex:first-child .badge-killy {
     }
 }
 
-
-
-
-
-
+/* ==========================================================
+   Parte de tarjetas.
+========================================================== */
 
 .killy-collection-card {
     background-color: var(--killy-blanco);
