@@ -1,4 +1,20 @@
+# Entorno virtual
 venv/
+
+# Variables privadas
 .env
-__pycache__
+
+# Archivos temporales Python
+__pycache__/
+*.pyc
+
+# Configuración del editor
+.vscode/
+
+# Archivos del sistema
+.DS_Store
+
+# Bases de datos locales
 *.sql
+*.sqlite
+*.sqlite3

@@ -19,6 +19,12 @@ class Config:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    SQLALCHEMY_ENGINE_OPTIONS = {
+    'pool_size': 2,        # máximo de conexiones activas
+    'max_overflow': 0,     # conexiones extras que se pueden crear sobre el pool
+    'pool_recycle': 280,   # segundos tras los cuales se recicla la conexión
+}
+
     # -------------------------------------------------
     # Configuración para subida de imágenes
     # -------------------------------------------------
